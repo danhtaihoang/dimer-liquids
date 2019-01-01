@@ -1,0 +1,65 @@
+#!/bin/sh
+
+for i in 1 2 3 4 5
+do
+
+# Gan cac bien cua Mz Tc
+if [ $i -eq 1 ]
+then
+name_y="Mz"
+number_culomn=2
+file_average_dat="average_thermal_histo_max_log.dat"
+fi
+
+# Gan cac bien cua Cv max
+if [ $i -eq 2 ]
+then
+name_y="Cvmax"
+number_culomn=3
+file_average_dat="average_thermal_histo_max_log.dat"
+fi
+
+# Gan cac bien cua Ksi max
+if [ $i -eq 3 ]
+then
+name_y="Ksimax"
+number_culomn=4
+file_average_dat="average_thermal_histo_max_log.dat"
+fi
+
+
+# Gan cac bien cua V1max
+if [ $i -eq 4 ]
+then
+name_y="V1max"
+number_culomn=5
+file_average_dat="average_thermal_histo_max_log.dat"
+fi
+
+# Gan cac bien cua V2max
+if [ $i -eq 5 ]
+then
+name_y="V2max"
+number_culomn=6
+file_average_dat="average_thermal_histo_max_log.dat"
+fi
+
+# =============================================================================================
+# =============================================================================================
+# VE DO THI
+# =============================================================================================
+# =============================================================================================
+
+gnuplot -persist << EOF
+set term postscript eps enhanced color "Times-Roman" 14
+set autoscale
+set key right top
+set pointsize 1
+set xlabel "Ln(L)"
+set ylabel "$name_y"
+set output "$name_y and L.eps"
+plot "$file_average_dat" u 1:$number_culomn notitle w p lt 3 pt 7
+
+EOF
+done
+

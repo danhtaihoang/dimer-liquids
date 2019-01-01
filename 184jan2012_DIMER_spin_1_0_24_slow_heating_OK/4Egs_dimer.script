@@ -1,0 +1,18 @@
+#!/bin/sh
+
+gnuplot -persist << EOF
+set term postscript enhanced color "Times-Roman" 28
+set autoscale
+set key right top
+set pointsize 1.2
+set xlabel "rc"
+set ylabel "E"
+set output "Egs-r.eps"
+set title "Egs J=1.0 D=1.5"
+plot "E-gs_D=1.5,GS2.txt" u 1:2 t "GS2" w p lt -1 pt 7,\
+"E-gs_D=1.5,GS3.txt" u 1:2 t "GS3" w p lt 3 pt 13,\
+"E-gs_D=1.5,GS4.txt" u 1:2 t "GS4" w p lt 9 pt 65
+
+EOF
+
+

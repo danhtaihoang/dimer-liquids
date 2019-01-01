@@ -1,0 +1,47 @@
+#!/bin/sh
+# Chay chuong trinh main_histogam_spin cho toan bo cac thu muc
+
+i_folder=1
+while [ $i_folder -le 31 ]
+do
+
+rm $i_folder/2main_histogram_DIMER.f90
+rm $i_folder/1parameter.in
+
+cp 2main_histogram_DIMER.f90 $i_folder
+cp 1parameter.in $i_folder
+
+cd $i_folder
+echo "COMPILE"
+gfortran -Wall -fdefault-integer-8 -fdefault-real-8 2main_histogram_DIMER.f90
+echo "CACUL"
+./a.out
+cd ..
+
+i_folder=$(echo "scale=0; $i_folder+1" | bc)
+
+done
+
+
+# Gop gia tri tinh duoc tu cac file average_thermal_histo
+# cua cac thu muc rieng re ve cung 1 file
+
+echo "Make a file average_thermal_histo.dat"
+
+rm average_thermal_histo.dat
+
+i_folder=1
+while [ $i_folder -le 31 ]
+do
+
+cat $i_folder/average_thermal_histo.dat >> average_thermal_histo.dat
+
+i_folder=$(echo "scale=0; $i_folder+1" | bc)
+
+done
+
+echo "Calcul Ln(L),Ln(Mz),Ln(Cvmax),Ln(Ksimax),Ln(V1max),Ln(V2max)"
+gfortran -Wall -fdefault-integer-8 -fdefault-real-8 2value_max.f90
+./a.out
+
+

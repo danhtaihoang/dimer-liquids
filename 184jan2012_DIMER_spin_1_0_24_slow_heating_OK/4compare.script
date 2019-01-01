@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# =============================================================================================
+# =============================================================================================
+# GAN CAC DAI LUONG CAN VE DO THI
+# =============================================================================================
+# =============================================================================================
+
+for i in 1 2 3 4 5
+do
+
+# Gan cac bien cua Nang luong E
+if [ $i -eq 1 ]
+then
+name_y="E"
+number_culomn=2
+fi
+
+# Gan cac bien cua OP
+if [ $i -eq 2 ]
+then
+name_y="M"
+number_culomn=3
+fi
+
+# Gan cac bien cua Cv
+if [ $i -eq 3 ]
+then
+name_y="Cv"
+number_culomn=4
+fi
+
+
+# Gan cac bien cua Ksi
+if [ $i -eq 4 ]
+then
+name_y="Ksi"
+number_culomn=5
+fi
+
+
+# =============================================================================================
+# =============================================================================================
+# VE DO THI
+# =============================================================================================
+# =============================================================================================
+
+gnuplot -persist << EOF
+set term postscript enhanced color "Times-Roman" 25
+set autoscale
+set key right top
+set pointsize 1
+set xlabel "T"
+set ylabel "$name_y"
+set output "$name_y compare.eps"
+set title "Compare 12 and 24"
+plot "average_thermal_12.dat" u 1:$number_culomn t "12" w p lt -1 pt 7,\
+"average_thermal_24.dat" u 1:$number_culomn t "24" w p lt 3 pt 65
+
+EOF
+done
+
+
+
+
+
+
+

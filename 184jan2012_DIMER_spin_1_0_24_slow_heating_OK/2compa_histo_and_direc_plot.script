@@ -1,0 +1,14 @@
+#!/bin/sh
+
+gnuplot -persist << EOF
+set term postscript enhanced color "Times-Roman" 14
+set autoscale
+set key right top
+set pointsize 1
+set xlabel "E"
+set ylabel "E"
+set output "direc_and_histo.ps"
+plot "average_thermal.dat" u 1:5 t "direc" w p pt 7 lt -1,\
+"average_thermal_histo.dat" u 1:5 t "histo" w p pt 11 lt 1
+
+EOF

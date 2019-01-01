@@ -1,0 +1,19 @@
+#!/bin/sh
+# Gop gia tri tinh duoc tu cac file average_thermal.dat
+# cua cac thu muc rieng re ve cung 1 file
+
+echo "Make a file average_thermal_direc.dat"
+
+rm average_thermal.dat
+
+i_folder=1
+while [ $i_folder -le 11 ]
+do
+
+cat $i_folder/average_thermal.dat >> average_thermal.dat
+
+i_folder=$(echo "scale=0; $i_folder+1" | bc)
+
+done
+
+
